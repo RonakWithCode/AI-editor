@@ -1,0 +1,125 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_background_color"
+    tools:context=".Fragment.ResultTextGenerationFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/_14sdp">
+
+        <WebView
+            android:id="@+id/richTextEditor"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_250sdp"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="@dimen/_16sdp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:id="@+id/feelingsInputLayout"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/richTextEditor"
+            android:layout_marginBottom="@dimen/_16sdp"
+            android:hint="@string/select_or_enter_feeling">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/feelingsInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/main_text_color"
+                android:background="@drawable/edit_text_background"
+                android:padding="@dimen/_10sdp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:id="@+id/formatInputLayout"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/feelingsInputLayout"
+            android:layout_marginBottom="@dimen/_16sdp"
+            android:hint="@string/select_or_enter_format">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/formatInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/main_text_color"
+                android:background="@drawable/edit_text_background"
+                android:padding="@dimen/_10sdp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/Container"
+            android:layout_below="@id/formatInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_3sdp">
+
+            <EditText
+                android:id="@+id/WordsCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_background"
+                android:hint="Enter a number"
+                android:inputType="number"
+                android:textColor="@color/main_text_color"
+                android:padding="@dimen/_10sdp"
+                app:layout_constraintEnd_toStartOf="@+id/radioGroup"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RadioButton
+                    android:id="@+id/radioWords"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Words"
+                    android:textColor="@color/main_text_color"
+                    android:padding="@dimen/_8sdp" />
+
+                <RadioButton
+                    android:id="@+id/radioCharacters"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Characters"
+                    android:textColor="@color/main_text_color"
+                    android:padding="@dimen/_8sdp" />
+            </RadioGroup>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <EditText
+            android:id="@+id/userInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/type_your_content_here"
+            android:textColor="@color/main_text_color"
+            android:background="@drawable/edit_text_background"
+            android:padding="@dimen/_10sdp"
+            android:layout_below="@id/Container"
+            android:layout_marginBottom="@dimen/_16sdp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/change"
+            android:layout_below="@+id/userInput"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:src="@drawable/baseline_add_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+</ScrollView>

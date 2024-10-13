@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+
+    <color name="green_primary">#4CAF50</color>
+    <color name="green_primary_variant">#388E3C</color>
+    <color name="grey_green_primary_variant">#fff5e4</color>
+
+    <color name="orange_secondary">#FFA726</color>
+    <color name="orange_secondary_variant">#FF7043</color>
+    <!--    <item name="colorPrimary">@color/primaryColor</item>-->
+    <!--    <item name="colorPrimaryDark">@color/primaryTextColor</item>-->
+    <!--    <item name="colorAccent">@color/secondaryColor</item>-->
+
+
+    <!--    Main Activity-->
+    <color name="main_text_color">#FFFFFFFF</color>
+    <color name="main_hint_text_color">#B0B0B0</color>
+    <color name="main_background_color">#FF000000</color>
+
+
+
+</resources>

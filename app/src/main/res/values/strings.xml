@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">SmartWrite</string>
+    <string name="enter_the_sentence_that_you_want_to_modify">Enter the sentence that you want to modify</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="create_summary">Create Summary</string>
+    <string name="text_generate">Text Generate</string>
+    <string name="pdf_explore">PDF Explore</string>
+    <string name="add_prompt">add prompt</string>
+    <string name="generate_text">Generate Text</string>
+    <string name="in_the_text_input_field_below_write_the_prompt_you_want_to_generate_be_sure_to_express_any_feelings_or_specific_formats_you_wish_to_include_and_choose_from_the_options_provided">In the text input field below, write the prompt you want to generate. Be sure to express any feelings or specific formats you wish to include, and choose from the options provided.</string>
+    <string name="write_your_prompt">Write your prompt</string>
+    <string name="custom_length">Custom Length</string>
+    <string name="words">Words</string>
+    <string name="characters">Characters</string>
+    <string name="type_your_content_here">Type your content here...</string>
+    <string name="select_or_enter_feeling">Select or enter feeling</string>
+    <string name="select_or_enter_format">Select or enter format</string>
+</resources>
