@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_background_color"
     tools:context=".Fragment.TextGenerateFragment">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/_16sdp">
@@ -14,88 +15,100 @@
         <com.pushstartuphub.smartwrite.view.GradientTextView
             android:id="@+id/Title"
             android:textColor="@color/main_text_color"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:text="@string/generate_text"
             android:textStyle="bold|italic"
-            android:layout_marginTop="@dimen/_20sdp"
             android:textSize="@dimen/_34ssp"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:layout_marginTop="@dimen/_20sdp"/>
 
         <TextView
-            android:layout_height="wrap_content"
             android:id="@+id/SubTitle"
-            android:layout_below="@id/Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:textColor="@color/main_hint_text_color"
-            android:layout_width="match_parent"
             android:text="@string/in_the_text_input_field_below_write_the_prompt_you_want_to_generate_be_sure_to_express_any_feelings_or_specific_formats_you_wish_to_include_and_choose_from_the_options_provided"
             android:textStyle="bold|italic"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:textSize="@dimen/_12ssp" />
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintTop_toBottomOf="@id/Title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:layout_marginTop="@dimen/_10sdp" />
 
         <EditText
             android:id="@+id/promptInput"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="200dp"
-            android:layout_below="@id/SubTitle"
-            android:layout_marginTop="@dimen/_16sdp"
             android:background="@drawable/border"
             android:padding="16dp"
             android:hint="@string/write_your_prompt"
             android:inputType="textMultiLine"
             android:gravity="top|start"
-            android:minLines="5" />
+            android:minLines="5"
+            app:layout_constraintTop_toBottomOf="@id/SubTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:layout_marginTop="@dimen/_16sdp" />
 
         <LinearLayout
             android:id="@+id/promptType"
-            android:layout_below="@id/promptInput"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:padding="@dimen/_8sdp"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/promptInput"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_16sdp">
 
             <Spinner
                 android:id="@+id/feelingsSpinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginEnd="@dimen/_8sdp"
-                tools:ignore="TouchTargetSizeCheck" />
+                android:layout_marginEnd="@dimen/_8sdp" />
 
             <Spinner
                 android:id="@+id/typeSpinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginEnd="@dimen/_8sdp"
-                tools:ignore="TouchTargetSizeCheck" />
+                android:layout_marginEnd="@dimen/_8sdp" />
 
             <Spinner
-                android:id="@+id/modeSpinner"
+                android:id="@+id/LanguageSpinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginEnd="@dimen/_8sdp"
-                tools:ignore="TouchTargetSizeCheck" />
+                android:layout_marginEnd="@dimen/_8sdp" />
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
-            android:layout_below="@id/promptType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="@dimen/_16sdp"
             android:src="@drawable/baseline_add_24"
-            android:contentDescription="@string/add_prompt" />
+            android:contentDescription="@string/add_prompt"
+            app:layout_constraintTop_toBottomOf="@id/promptType"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_16sdp"/>
 
         <ProgressBar
             android:id="@+id/loadingIndicator"
             android:visibility="gone"
-            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RelativeLayout>
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/fab"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_16sdp"/>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

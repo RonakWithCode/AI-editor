@@ -56,7 +56,6 @@ dependencies {
 
     implementation(libs.material)
 
-    implementation(libs.are)
 
 
     implementation(libs.navigation.ui)

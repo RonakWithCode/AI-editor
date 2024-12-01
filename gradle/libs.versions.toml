@@ -1,6 +1,5 @@
 [versions]
 agp = "8.5.2"
-are = "0.2.1"
 generativeai = "0.9.0"
 guava = "32.0.1-android"
 junit = "4.13.2"
@@ -18,7 +17,6 @@ ssp = "1.1.0"
 
 
 [libraries]
-are = { module = "com.github.chinalwb:are", version.ref = "are" }
 generativeai = { module = "com.google.ai.client.generativeai:generativeai", version.ref = "generativeai" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

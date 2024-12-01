@@ -29,6 +29,7 @@ public class TextGenerateFragment extends Fragment {
 
     private String[] feelings = {"Happy", "Sad", "Excited", "Angry", "Neutral"};
     private String[] textTypes = {"Letter", "Application", "Email", "Report"};
+    String[] languages = {"English","Hindi" , "Hienglish" ,"Spanish", "French", "German"};
 
     public TextGenerateFragment() {
         // Required empty public constructor
@@ -59,12 +60,21 @@ public class TextGenerateFragment extends Fragment {
                 android.R.layout.simple_spinner_item, textTypes);
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.typeSpinner.setAdapter(typeAdapter);
+
+
+        ArrayAdapter<String> LanguageAdapter = new ArrayAdapter<>(getContext(),
+                android.R.layout.simple_spinner_item, languages);
+        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.LanguageSpinner.setAdapter(LanguageAdapter);
+
+
     }
 
     private void validateFields() {
         String prompt = binding.promptInput.getText().toString().trim();
         String selectedFeeling = binding.feelingsSpinner.getSelectedItem() != null ? binding.feelingsSpinner.getSelectedItem().toString() : null;
         String selectedType = binding.typeSpinner.getSelectedItem() != null ? binding.typeSpinner.getSelectedItem().toString() : null;
+        String selectedLanguage = binding.LanguageSpinner.getSelectedItem() != null ? binding.typeSpinner.getSelectedItem().toString() : null;
 
         if (prompt.isEmpty()) {
             showSnackbar("Please enter a prompt.");
@@ -78,8 +88,12 @@ public class TextGenerateFragment extends Fragment {
             showSnackbar("Please select a text type.");
             return;
         }
+        if (selectedLanguage == null) {
+            showSnackbar("Please select a Language.");
+            return;
+        }
 
-        GenerateText(prompt, selectedFeeling, selectedType);
+        GenerateText(prompt, selectedFeeling, selectedType,selectedLanguage);
     }
 
 //    private void GenerateText(String originalText, String selectedFeeling, String selectedType) {
@@ -117,10 +131,19 @@ public class TextGenerateFragment extends Fragment {
 
 
 
-    private void GenerateText(String originalText, String selectedFeeling, String selectedType) {
-        String mainPrompt = "Please generate a " + selectedType + " in HTML format that expresses a " + selectedFeeling +
-                " based on the following text: " + originalText +
-                ". and Highlight the important parts and provide only the generated text In a proper document format, without any additional explanation.";
+    private void GenerateText(String originalText, String selectedFeeling, String selectedType,String selectedLanguage) {
+//        String mainPrompt = "Please generate a " + selectedType + " in HTML format that expresses a " + selectedFeeling +
+//                " based on the following text: " + originalText +
+//                ". and Highlight the important parts and provide only the generated text In a proper document format, without any additional explanation.";
+
+        // Create the main prompt for Gemini
+        String mainPrompt = String.format("Generate a properly formatted HTML document as a %s in %s that expresses a %s tone based on the following prompt: %s. Include headings, paragraphs, and any other necessary HTML elements, and provide only the generated HTML without additional explanations.",
+                selectedType, selectedLanguage, selectedFeeling, originalText);
+
+//        String mainPrompt = String.format("Generate a %s in %s that expresses a %s tone based on the following prompt: %s",
+//                selectedFormat, selectedLanguage, selectedTone, userPrompt);
+
+
 
         // Show loading indicator on the main thread
         requireActivity().runOnUiThread(() -> loadingIndicator.setVisibility(View.VISIBLE));
@@ -138,7 +161,9 @@ public class TextGenerateFragment extends Fragment {
                 String resultText = result.getText();
                 requireActivity().runOnUiThread(() -> {
                     loadingIndicator.setVisibility(View.GONE); // Hide loading indicator
-                    navigateToNextFragment(originalText, resultText,selectedFeeling,selectedType);
+//                    String cleanText = cleanAndFormatText(resultText);
+
+                    navigateToNextFragment(originalText, resultText,selectedFeeling,selectedType,selectedLanguage);
                 });
             }
 
@@ -154,21 +179,39 @@ public class TextGenerateFragment extends Fragment {
     }
 
 
+    private String cleanAndFormatText(String rawText) {
+        // Remove HTML tags and trim the text
+        String cleanedText = rawText.replaceAll("<[^>]*>", "").trim();
+
+        // Handle special characters and any additional formatting you need
+        cleanedText = cleanedText.replaceAll("[^\\p{L}\\p{N}\\s.,;:!?\"'()\\[\\]]", ""); // Retain only letters, numbers, and common punctuation
+        cleanedText = cleanedText.replaceAll("\\s+", " "); // Replace multiple spaces with a single space
+
+        // Add additional formatting based on the selected type, if necessary
+        // For example, if the format is a letter, you might want to add a header, etc.
+
+        return cleanedText;
+    }
+
+
 
 
     private void showSnackbar(String message) {
         Snackbar.make(binding.getRoot(), message, Snackbar.LENGTH_SHORT).show();
     }
 
-    private void navigateToNextFragment(String prompt, String resultText ,String selectedFeeling ,String selectedType) {
+    private void navigateToNextFragment(String prompt, String resultText ,String selectedFeeling ,String selectedType,String languages) {
         Bundle bundle = new Bundle();
         bundle.putString("prompt", prompt);
         bundle.putString("result", resultText);
         bundle.putString("selectedFeeling", selectedFeeling);
         bundle.putString("selectedType", selectedType);
-        int wordCount = resultText.trim().isEmpty() ? 0 : resultText.trim().split("\\s+").length;
+        bundle.putString("languages", languages);
+        String cleanText = resultText.replaceAll("<[^>]*>", ""); // Remove HTML tags
+        int wordCount = cleanText.trim().isEmpty() ? 0 : cleanText.trim().split("\\s+").length;
         bundle.putInt("Length", wordCount);
         NavHostFragment.findNavController(this)
                 .navigate(R.id.action_text_generate_Fragment_to_resultTextGenerationFragment, bundle);
     }
+
 }

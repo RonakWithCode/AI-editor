@@ -20,5 +20,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "SmartWrite"
-include(":app" , ":are")
+include(":app")
 
